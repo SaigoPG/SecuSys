@@ -42,6 +42,6 @@ export class Tab4Page {
 
   generarNotaAleatoria(): number {
     // Genera una nota entre 2.5 y 5.0 con dos decimales
-    return parseFloat((Math.random() * (5 - 2.5) + 2.5).toFixed(1));
+    return Number.parseFloat((Math.random() * (5 - 2.5) + 2.5).toFixed(1));
   }
 }

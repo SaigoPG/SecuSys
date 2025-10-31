@@ -57,7 +57,7 @@
         </ion-item>
 
         <!-- Botón guardar -->
-        <ion-button expand="block" color="primary" (click)="guardarNota()">
+        <ion-button expand="block" color="primary" (click)="guardarNota()" (keydown.enter)="guardarNota()">
           Guardar Nota
         </ion-button>
 
