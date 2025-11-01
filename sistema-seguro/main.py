@@ -5,6 +5,7 @@ from routers.subjects import router as subjects_router
 from routers.users import router as users_router
 
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
 app = FastAPI(
     
@@ -27,6 +28,15 @@ app.add_middleware(
     allow_methods = ["*"],
     allow_headers = ["*"]
 )
+
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Embedder-Policy"] = "require-corp"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
 
 @app.get("/")
 def root():

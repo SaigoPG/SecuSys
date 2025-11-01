@@ -4,14 +4,14 @@ from passlib.context import CryptContext
 from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from dotenv import load_dotenv
+from dotenv import load_dotenv as ld
 
 from . import models
 from .db import get_db
 
 import os
 
-load_dotenv()
+ld("env\.env")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev_test_key_to_change")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
@@ -57,7 +57,7 @@ def require_admin(user: models.User = Depends(get_current_user)) -> models.User:
 
 def require_teacher(user: models.User = Depends(get_current_user)) -> models.User:
 
-    if user.role != models.RoleEnum.teacher or user.role != models.RoleEnum.teacher:
+    if user.role != models.RoleEnum.teacher or user.role != models.RoleEnum.admin:
         raise HTTPException(status_code = status.HTTP_403_FORBIDDEN, detail = "Se requieren privilegios de profesor o administrador")
 
     return user
