@@ -1,9 +1,12 @@
 from sqlalchemy import create_engine as ce
 from sqlalchemy.orm import sessionmaker as sm, declarative_base as dec
 from dotenv import load_dotenv as ld
+from pathlib import Path
 import os
 
-ld("env\.env")
+env_path = Path(__file__).resolve().parents[2] / "env" / ".env"
+
+ld(env_path)
 
 DB_USER = os.getenv("DB_USER")
 DB_PASSWORD = os.getenv("DB_PASSWORD")

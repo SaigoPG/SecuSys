@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from utils.db import Base, engine
-from utils import models
-from routers.subjects import router as subjects_router
-from routers.users import router as users_router
+from app.utils.db import Base, engine
+from app.utils import models
+from app.routers.subjects import router as subjects_router
+from app.routers.users import router as users_router
 
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware

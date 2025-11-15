@@ -4,6 +4,7 @@ from passlib.context import CryptContext
 from fastapi import HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
+from pathlib import Path
 from dotenv import load_dotenv as ld
 
 from . import models
@@ -11,7 +12,12 @@ from .db import get_db
 
 import os
 
-ld("env\.env")
+env_path = Path(__file__).resolve().parents[2] / "env" / ".env"
+
+print("Loading env from:", env_path)       # TEMP DEBUG
+print("Exists:", env_path.exists())  
+
+ld(env_path)      
 
 SECRET_KEY = os.getenv("SECRET_KEY", "dev_test_key_to_change")
 ALGORITHM = os.getenv("ALGORITHM", "HS256")
