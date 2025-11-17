@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://127.0.0.1:8000'
+  apiUrl: 'http://secusys-alb-1755636718.us-east-1.elb.amazonaws.com'
 };
 
 /*
